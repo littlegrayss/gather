@@ -2,7 +2,7 @@
         <div class="menu-lists"> 
             <menu-item v-for="(item, index) in menuItems"
                        :key="index"
-                       :menuInfo="item"
+                       :menuInfo="item"                       
             ></menu-item>           
         </div>
 </template>

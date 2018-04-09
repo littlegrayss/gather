@@ -1,15 +1,26 @@
 <template>
-            <router-link :to="menuInfo.url" class="tap">
+            <a class="tap" @click.stop.prevent="alert">
                 <span class="a-list">
-                    <span :class="['iconfont','icon',menuInfo.icon]"></span>
+                    <i :class="['iconfont','icon',menuInfo.icon]"></i>
                     <span class="list-text">{{menuInfo.text}}</span>
                 </span>
-            </router-link>
+            </a>
 </template>
 
 <script>
+    import store from '../store'
     export default {
-        props: ['menuInfo']
+        props: ['menuInfo'],
+        methods: {
+            alert() {
+                if (this.menuInfo.url == '') {
+                    // console.log('111');
+                    this.$store.commit('on');
+                } else {
+                    this.$router.push(this.menuInfo.url);
+                }
+            }
+        }
     }
 </script>
 
@@ -43,5 +54,8 @@
 }
 .tap:active .a-list .list-text,.tap:active .a-list .icon{
     color: #fff;
+}
+.tap:hover{
+  cursor:pointer
 }
 </style>

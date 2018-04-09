@@ -9,12 +9,13 @@
                 <span class="tips"><span class="to-register" @click="toRegister">注册</span>/<span class="to-forget">忘记密码</span></span>
             </Input>
             <Input :input="inputLists.password"></Input>
-            <button class="btn">Login in</button>
+            <button class="btn" @click="submit">Login in</button>
         </div>
     </div>
 </template>
 
 <script>
+    import store from '../store'
     import Input from '../components/Input'
     export default {
         data() {
@@ -36,6 +37,10 @@
         methods: {
             toRegister() {
                 this.$router.push('./register');
+            },
+            submit() {
+
+                // this.$store.commit('yes');
             }
         },
         components: {

@@ -1,7 +1,7 @@
 <template>
     <div class="bottom-bar" v-if="choosed">
         <slot></slot>
-        <button :class="['btn',isChoose?'active':'']">{{text}}</button>
+        <button :class="['btn',isChoose?'active':'']" >{{text}}</button>
     </div>
 </template>
 

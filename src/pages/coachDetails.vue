@@ -4,11 +4,15 @@
         <div class="top-bg"></div>
         <div class="top">
             <span class="avatar">
-                <span>1</span>
+                <span class="avatar-btn" @click="undone">
+                    <i class="iconfont icon-chat"></i>
+                </span>                
                     <div class="avatar-wrap">
                         <img :src="coach.avatar" alt="">
-                    </div>                    
-                <span>2</span>
+                    </div> 
+                <span class="avatar-btn" @click="undone">                   
+                    <i class="iconfont icon-good"></i>
+                </span>
             </span>
         </div>
          <div class="details">
@@ -71,6 +75,11 @@
                     about: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
                 }
             }
+        },
+        methods: {
+            undone() {
+                this.$store.commit('on');
+            }
         }
     }
 </script>
@@ -91,13 +100,15 @@
     font-weight: bolder;
 }
 .top-bg {
+    background-image: url('/static/ping-pong-bg.jpg');
     width: 100vw;
     height: 26vh;
+    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
-    background: lemonchiffon;
+    /* background: lemonchiffon; */
 }
 .top {
     margin-top: 18vh;
@@ -105,13 +116,14 @@
 .avatar {
     flex: 0 0 32%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;  
 }
 .avatar-wrap {
+    /* box-sizing: border-box; */
     width: 12vh;
     height: 12vh;
-    border-radius: 6vh;
+    border-radius: 8vh;
     background-color: transparent;
     overflow: hidden;
     border: 6px solid #fff
@@ -120,6 +132,24 @@
     width: 12vh;
     height: 12vh;
     border-radius: 6vh;
+}
+.avatar-btn {
+    width: 36px;
+    height:36px;
+    border-radius: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    box-shadow: 0 1px 6px rgba(158,158,158,.3);
+}
+.icon-chat {
+    color: palegreen;
+    font-size: 22px;
+}
+.icon-good {
+    color: red;
+    font-size: 22px;
 }
 .s-avatar {
     width: 3vh;

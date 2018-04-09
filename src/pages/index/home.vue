@@ -1,15 +1,16 @@
 <template>
     <div>
-        <div class="swiper"></div>
+        <Slider></Slider>
         <home-menu></home-menu>
     </div>
 </template>
 
 <script>
+    import Slider from '../../components/Slider'
     import homeMenu from '../../components/homeMeun'
     export default {
         components: {
-            homeMenu
+            Slider,homeMenu
         }
     }
 </script>

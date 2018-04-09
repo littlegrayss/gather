@@ -16,11 +16,13 @@
     import sportsTop from '../../components/sportsTop'
     import joinSports from './joinSports'
     import createSports from './createSports'
-    import bottomBar from '../../components/bottomBar'
+    import bottomBar from '../../components/bottomBar'    
+
     export default {
         data() {
             return {               
-                isChoose: false
+                isChoose: false,
+                
             }
         },
         methods: {
@@ -30,7 +32,8 @@
             show(data) {
                 this.isChoose = data;
                 console.log(data);                
-            }
+            },
+            
         },
         computed: {
             isCreate() {

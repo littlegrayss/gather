@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="app">
 		<transition name="router-fade" mode="out-in">
 			<keep-alive>
 			    <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -8,14 +8,22 @@
     	<transition name="router-fade" mode="out-in">
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
-		<!-- <svg-icon></svg-icon>	 -->
+		
+		<modal v-if="isModal" :message="'敬请期待'"></modal>
+		<!-- <message :messageType="messageType" ></message> -->
     </div>
 </template>
 
 <script>
-	// import svgIcon from './components/common/svg';
-	
-  	export default {
+	import Modal from './components/Modal'
+	// import Message from './components/Message'
+	import store from './store'
+  	export default {	
+		//   data()	   {
+		// 	  return {
+		// 		  messageType: 
+		// 	  }
+		//   },
 		  beforeCreate() {
 			top.window.moveTo(0,0);  
 			//判断是否为IE浏览器  
@@ -36,8 +44,17 @@
 			}  
 			}  
 		  },
+		  computed:{
+				isModal(){
+					return this.$store.state.isModal;
+				},
+				// messageType() {
+				// 	return this.$store.state.messageType;
+				// }
+				
+			},
     	components:{
-            // svgIcon
+            Modal
         },
   	}
 
