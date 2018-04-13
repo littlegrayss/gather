@@ -17,12 +17,12 @@
             }
         },
         methods: {
-            close() {
-                clearTimeout(this.timer);
-                this.$store.commit('end');
-                this.$destroy();
-                this.$el.remove();
-            },
+            // close() {
+            //     clearTimeout(this.timer);
+            //     this.$store.commit('end');
+            //     this.$destroy();
+            //     this.$el.remove();
+            // },
         },
         computed: {
             message() {
@@ -36,18 +36,21 @@
         },
         
         beforeMount() {
-            let parent;
-            parent = document.querySelector('#app');
+            // let parent;
+            // parent = document.querySelector('#app');
             // if (!parent) {
             // parent = document.createElement('div');
             // parent.classList.add('notifications', this.placement);
             // document.body.appendChild(parent);
             // }
-            parent.appendChild(this.$el);
+            // parent.appendChild(this.$el);
         },
         mounted() {
             
-            this.timer = setTimeout(() => this.close(), 3000);
+            // this.timer = setTimeout(() => this.close(), 3000);
+        },
+        watch: {
+            
         }
     }
 </script>

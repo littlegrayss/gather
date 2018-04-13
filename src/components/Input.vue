@@ -4,13 +4,21 @@
             <label :for="input.name">{{input.text}}</label> 
             <slot></slot>
         </div>                           
-        <input :type="input.type" :name="input.name" >
+        <input :type="input.type"
+                ref="input" 
+                :value="value" 
+                @input="$emit('input',$event.target.value)">
     </div>
 </template>
 
 <script>
     export default {
-        props: ['input']
+        props: ['input','value'],
+        data() {
+            return {
+                name: ''
+            }
+        }
     }
 </script>
 
@@ -25,7 +33,7 @@
 .input-row label {
     font-size: 14px;
     font-weight: bold;
-    color: rgb(43,140,255);
+    color: rgb(76,98,252);
     /* align-self: flex-start; */
 }
 .input-row input {
@@ -38,9 +46,9 @@
     margin-top: 8px;
     border-radius: 2px;
     outline: none;
-    border: 2.5px solid rgba(43,140,255,1);
+    border: 2.5px solid rgb(76,98,252);
 } 
 .input-row input:focus {
-    border: 2.5px solid blue;
+    border: 2.5px solid rgba(43,140,255,1);
 }
 </style>

@@ -16,13 +16,13 @@
             <div class="follows">
                 <div class="follows-avatar">
                     <span class="s-avatar">
-                        <img src="../../static/avatar-1.jpg" alt="">
+                        <img :src="follows[0]" alt="">
                     </span>
                     <span class="s-avatar brother-avatar">
-                        <img src="../../static/avatar-2.jpg" alt="">
+                        <img :src="follows[1]" alt="">
                     </span>
                     <span class="s-avatar brother-avatar">
-                        <img src="../../static/avatar-3.jpg" alt="">
+                        <img :src="follows[2]" alt="">
                     </span>...                    
                 </div>
                 <span class="follows-text">
@@ -36,6 +36,11 @@
     
     export default {
         props: ['coach'],
+        data() {
+            return {
+                follows: ["./static/avatar-1.jpg","./static/avatar-2.jpg","./static/avatar-3.jpg"]
+            }
+        },
         components: {
             
         }

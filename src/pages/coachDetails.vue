@@ -22,17 +22,17 @@
         <div class="follows">
             <span class="follows-avatar">
                 <span class="s-avatar">
-                    <img src="../../static/avatar-1.jpg" alt="">
+                    <img :src="coach.follows[0]" alt="">
                 </span>
                 <span class="s-avatar brother-avatar">
-                    <img src="../../static/avatar-2.jpg" alt="">
+                    <img :src="coach.follows[1]" alt="">
                 </span>
                 <span class="s-avatar brother-avatar">
-                    <img src="../../static/avatar-3.jpg" alt="">
+                    <img :src="coach.follows[2]" alt="">
                 </span>...                    
             </span>
             <span class="follows-text">
-                <span>{{coach.follows}}</span>人点赞
+                <span>{{coach.followNum}}</span>人点赞
             </span>            
         </div>
 
@@ -68,12 +68,14 @@
         data() {
             return {
                 coach: {
-                    avatar: '/static/avatar-1.jpg',
+                    avatar: './static/avatar-1.jpg',
                     name: '古天乐',
                     goodAt: '@跑步 @篮球',
-                    follows: '6',
+                    follows: ["./static/avatar-1.jpg","./static/avatar-2.jpg","./static/avatar-3.jpg"],
+                    followNum: '6',
                     about: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-                }
+                },
+                
             }
         },
         methods: {
@@ -100,7 +102,8 @@
     font-weight: bolder;
 }
 .top-bg {
-    background-image: url('/static/ping-pong-bg.jpg');
+    background-image: url('http://www.littlegray.xin:8080/gather/static/run-bg.jpg');
+    background-size: cover;
     width: 100vw;
     height: 26vh;
     overflow: hidden;

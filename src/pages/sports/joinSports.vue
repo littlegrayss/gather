@@ -25,28 +25,28 @@
                 choosed: false,
                 lists:[{
                     index: 23455,
-                    avatar: '/static/avatar-1.jpg',
+                    avatar: './static/avatar-1.jpg',
                     location: '南区篮球场',
                     time: '3月15日17:00',
                     people: '2'
                 },
                 {
                     index: 23456,
-                    avatar: '/static/avatar-2.jpg',
+                    avatar: './static/avatar-2.jpg',
                     location: '风雨球场',
                     time: '3月15日17:30',
                     people: '1'
                 },
                 {
                     index: 23457,
-                    avatar: '/static/avatar-3.jpg',
+                    avatar: './static/avatar-3.jpg',
                     location: '风雨球场',
                     time: '3月15日17:30',
                     people: '4'
                 },
                 {
                     index: 23458,
-                    avatar: '/static/avatar-1.jpg',
+                    avatar: './static/avatar-1.jpg',
                     location: '风雨球场',
                     time: '3月15日17:30',
                     people: '1'

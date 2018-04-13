@@ -24,7 +24,7 @@
     border-top: .05rem solid #e6e6e6
 }
 .icon {
-    color: rgb(0,158,255);
+    color: rgb(76,98,252);
     padding-left: 1.4rem;
     padding-top: .4rem;
     font-size: 2rem;

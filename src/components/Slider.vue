@@ -41,7 +41,7 @@ export default {
         items: {
             type: Array,
             default() {
-                return [{src: '/static/slide-1.jpg'},{src: '/static/slide-2.jpg'},{src: '/static/slide-3.jpg'}]
+                return [{src: './static/slide-1.jpg'},{src: './static/slide-2.jpg'},{src: './static/slide-3.jpg'}]
             },
         },
     },
@@ -53,5 +53,6 @@ export default {
   .slide-img {
       width: 100vw;
       height: 220px;
+      
   }
 </style>

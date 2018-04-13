@@ -10,13 +10,13 @@
 		</transition>
 		
 		<modal v-if="isModal" :message="'敬请期待'"></modal>
-		<!-- <message :messageType="messageType" ></message> -->
+		<message :messageType="messageType" ></message>
     </div>
 </template>
 
 <script>
-	import Modal from './components/Modal'
-	// import Message from './components/Message'
+	import Modal from './components/global/Modal'
+	import Message from './components/global/Message'
 	import store from './store'
   	export default {	
 		//   data()	   {
@@ -48,9 +48,9 @@
 				isModal(){
 					return this.$store.state.isModal;
 				},
-				// messageType() {
-				// 	return this.$store.state.messageType;
-				// }
+				messageType() {
+					return this.$store.state.messageType;
+				}
 				
 			},
     	components:{

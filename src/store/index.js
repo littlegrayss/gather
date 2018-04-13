@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 const state = {
     isModal: false,
-    // messageType: 'hide',
+    messageType: 'hide',
+    userId: ''
 }
 
 const mutations = {
@@ -15,16 +16,18 @@ const mutations = {
     off(state) {
         state.isModal = false;
     },
-    // yes(state) {
-    //     state.messageType = 'yes';
-    // },
-    // no(state) {
-    //     state.messageType = 'no';
-    // },
-    // end(state) {
-    //     state.messageType = 'hide';
-    // },
-
+    yes(state) {
+        state.messageType = 'yes';
+    },
+    no(state) {
+        state.messageType = 'no';
+    },
+    hide(state) {
+        state.messageType = 'hide';
+    },
+    getUserId(state,str) {
+        state.userId = str;
+    }
 }
 
 export default new Vuex.Store({

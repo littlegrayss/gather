@@ -43,7 +43,7 @@
         },
         methods: {
         	gotoAddress(path){
-        		this.$router.push('./sports'+path)
+        		this.$router.push(path)
             },
             isActive(url) {
                 return this.$route.path.indexOf(url) !== -1? 'actived' : ''

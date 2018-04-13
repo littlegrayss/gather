@@ -1,6 +1,6 @@
 <template>
     <div>
-        <head-top :title='title'></head-top>
+        
         <div class="profile-bg"></div>
         <div class="avatar-wrap">
            
@@ -30,14 +30,12 @@
                   :list="li"
             ></list>
         </div>
-        <foot></foot>
+        
     </div>
 </template>
 
 <script>
-    import list from '../../components/list'
-    import headTop from '../../components/head'
-    import foot from '../../components/foot'
+    import list from '../../../components/list'
     export default {
         data() {
             return {
@@ -66,14 +64,14 @@
             }
         },
         components: {
-            headTop,foot,list
+            list
         }
     }
 </script>
 
 <style scoped>
 .profile-bg {
-    background-color: rgb(43,140,255);
+    background-color: rgb(76,98,252);
 	height:8.8rem;
 	width: 100%;
 	position: absolute;

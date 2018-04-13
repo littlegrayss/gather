@@ -22,10 +22,10 @@ import site from '../pages/site'
 import sportsShop from '../pages/sportsShop'
 import game from '../pages/game'
 
-import profile from'../pages/profile/profile'
-import info from'../pages/profile/info'
-import help from'../pages/profile/help'
-import settings from'../pages/profile/settings'
+import profile from'../pages/index/profile/profile'
+import info from'../pages/index/profile/info'
+import help from'../pages/index/profile/help'
+import settings from'../pages/index/profile/settings'
 
 Vue.use(Router)
 
@@ -45,20 +45,26 @@ export default new Router({
           children:[
             {
               path:'',
+              redirect: '/home'
+              // component: home
+            },
+            {
+              path:'/home',
               component: home
             },
             {
-              path:'home',
-              component: home
-            },
-            {
-              path: 'reservation',
+              path: '/reservation',
               component: reservation
             },
             {
-              path:'circle',
-              component: partTime
+              path:'/circle',
+              component: circle
             },
+            {
+              path: '/profile',
+              component: profile,
+            },
+            
           ]
         },
         {
@@ -116,21 +122,17 @@ export default new Router({
           component: sportsShop
         },        
         {
-          path: '/profile',
-          component: profile,
+          path: '/info', //个人信息详情页
+          component: info,
         },
         {
-            path: 'info', //个人信息详情页
-            component: info,
-          },
-          {
-            path: 'help', //帮助与反馈
-            component: help
-          },
-          {
-            path: 'settings', //设置
-            component: settings,
-          }
+          path: '/help', //帮助与反馈
+          component: help
+        },
+        {
+          path: '/settings', //设置
+          component: settings,
+        }
         
       ]
     }
