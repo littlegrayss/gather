@@ -24,9 +24,10 @@ import { setTimeout } from 'timers';
     export default {
         data() {
             return {
-                inputLists: {
-                    email: '',
+                email: '',
                     psd: '',
+                inputLists: {
+                    
                     email: {
                         name: 'email',
                         text: 'Email',
@@ -46,13 +47,16 @@ import { setTimeout } from 'timers';
             },
             submit() {
                 if (this.email == '') {
-
+                    this.$store.commit('on','请输入email');
+                    return false;
                 }
                 if (this.psd == '') {
-
+                    this.$store.commit('on','请输入password');
+                    return false;
                 }
+                //http://www.littlegray.xin:8801
                 var _this = this;            
-                this.$http.get('./api/login',{
+                this.$http.get('http://www.littlegray.xin:8801/api/login',{
                             params: {
                                 email: this.email,
                                 psd: this.psd,
@@ -64,10 +68,10 @@ import { setTimeout } from 'timers';
                             if (res.data.code == '200') {
                                 console.log('登录成功！');
                                 _this.$store.commit('getUserId',res.data.userId);
-                                console.log(this.$store.state.userId);
+                                console.log(_this.$store.state.userId);
                                 _this.$store.commit('yes');
                                 setTimeout(function(){
-                                    _this.$router.commit('hide');
+                                    _this.$store.commit('hide');
                                     _this.$router.push('./home');
                                 },1500);                          
 
@@ -75,7 +79,9 @@ import { setTimeout } from 'timers';
                                 console.log('登录失败！');
                                 _this.$store.commit('no');
                                 setTimeout(function(){
-                                    this.$router.commit('hide');
+                                    _this.$store.commit('hide');
+                                    _this.email = '';
+                                    _this.psd = '';
                                 },1500);
                             }
                             

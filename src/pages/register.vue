@@ -57,34 +57,36 @@
                 console.log(this.repsd);                
                 
                 if (this.email == '') {
-                    alert('请输入邮箱！');
+                    this.$store.commit('on','请输入email');
                     return false;
                 }
                 if (this.username == '') {
-                    alert('请输入用户名！');
+                    this.$store.commit('on','请输入用户名');
                     return false;
                 }
                 if (this.psd == '') {
-                    alert('请输入密码！');
+                    this.$store.commit('on','请输入密码');
                     return false;
                 }
                 if (this.repsd == '') {
-                    alert('请再次输入密码！');
+                    this.$store.commit('on','请再次输入密码');                                        
                     return false;
                 }
                 if (this.psd != this.repsd) {
-                    alert('两次密码不相同！');
+                    this.$store.commit('on','两次密码不相同');
+                    this.psd = '';
+                    this.repsd = '';
                     return false;
                 }
 
                 
-                
+                //http://www.littlegray.xin:8801
                 var _this = this;
                 this.$http.get('./api/register',{
                             params: {
                                 email: this.email,
                                 psd: this.psd,
-                                userName: this.username
+                                username: this.username
                             }
                         })
                         .then(function (res) {
@@ -94,10 +96,10 @@
                             if (res.data.code == '200') {
                                 console.log('注册成功！');
                                 _this.$store.commit('getUserId',res.data.userId);
-                                console.log(this.$store.state.userId);
+                                console.log(_this.$store.state.userId);
                                 _this.$store.commit('yes');
                                 setTimeout(function(){
-                                    _this.$router.commit('hide');
+                                    _this.$store.commit('hide');
                                     _this.$router.push('./home');
                                 },1500);                          
 
@@ -105,7 +107,9 @@
                                 console.log('注册失败！');
                                 _this.$store.commit('no');
                                 setTimeout(function(){
-                                    _this.$router.commit('hide');
+                                    _this.$store.commit('hide');
+                                    _this.psd = '';
+                                    _this.repsd = '';
                                 },1500);
                             }
                             

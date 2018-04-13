@@ -15,7 +15,7 @@
             alert() {
                 if (this.menuInfo.url == '') {
                     // console.log('111');
-                    this.$store.commit('on');
+                    this.$store.commit('on','敬请期待');
                 } else {
                     this.$router.push(this.menuInfo.url);
                 }

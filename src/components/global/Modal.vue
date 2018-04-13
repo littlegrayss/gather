@@ -11,11 +11,17 @@
 <script>
     import store from '../../store/index'
     export default {
-        props: ['message'],
+        // props: ['message'],
         methods: {
             ok() {
                 this.$store.commit('off');
             }
+        },
+        computed: {
+            message() {
+                return this.$store.state.modalText;
+            }
+            
         }
     }
 </script>

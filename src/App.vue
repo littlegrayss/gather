@@ -9,7 +9,7 @@
 			<router-view v-if="!$route.meta.keepAlive"></router-view>
 		</transition>
 		
-		<modal v-if="isModal" :message="'敬请期待'"></modal>
+		<modal v-if="isModal" ></modal>
 		<message :messageType="messageType" ></message>
     </div>
 </template>
@@ -54,7 +54,7 @@
 				
 			},
     	components:{
-            Modal
+            Modal,Message
         },
   	}
 

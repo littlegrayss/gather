@@ -1,4 +1,5 @@
 <template>
+
     <div class="sports-list">
         <span class="sponsor-avatar">
             <div class="avatar-wrap">
@@ -6,14 +7,16 @@
             </div>
         </span>
         <span class="sports-details">
-            <div>{{list.location}}</div>
+            <div>{{list.site}}</div>
             <div>{{list.time}}</div>
         </span>
         <span class="sports-people">
-            <div>{{list.people}}</div>
+            <div>{{list.waitingPeople}}</div>
             <div>缺少人数</div>
         </span>
     </div>
+    
+
 </template>
 
 <script>

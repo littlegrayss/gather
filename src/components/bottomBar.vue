@@ -1,16 +1,16 @@
 <template>
-    <div class="bottom-bar" v-if="choosed">
+    <div class="bottom-bar" >
         <slot></slot>
-        <button :class="['btn',isChoose?'active':'']" >{{text}}</button>
+        
     </div>
 </template>
 
 <script>
     export default {
-        props: ['text','isChoose'],
+        props: ['text','isSelect'],
         data() {
             return {
-                choosed: true
+                
             }
         }
     }
@@ -20,6 +20,7 @@
 .bottom-bar {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100vw;
     height: 48px;
     background-color: #fff;

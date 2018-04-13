@@ -5,16 +5,19 @@ Vue.use(Vuex);
 
 const state = {
     isModal: false,
+    modalText: '',
     messageType: 'hide',
     userId: ''
 }
 
 const mutations = {
-    on(state) {
+    on(state,str) {
         state.isModal = true;
+        state.modalText = str;
     },
     off(state) {
         state.isModal = false;
+        state.modalText = '';
     },
     yes(state) {
         state.messageType = 'yes';
