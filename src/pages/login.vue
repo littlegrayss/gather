@@ -47,16 +47,16 @@ import { setTimeout } from 'timers';
             },
             submit() {
                 if (this.email == '') {
-                    this.$store.commit('on','请输入email');
+                    this.$store.commit('on','请输入邮箱');
                     return false;
                 }
                 if (this.psd == '') {
-                    this.$store.commit('on','请输入password');
+                    this.$store.commit('on','请输入密码');
                     return false;
                 }
                 //http://www.littlegray.xin:8801
                 var _this = this;            
-                this.$http.get('http://www.littlegray.xin:8801/api/login',{
+                this.$http.get('./api/login',{
                             params: {
                                 email: this.email,
                                 psd: this.psd,

@@ -5,10 +5,10 @@
         <div class="avatar-wrap">
            
             <div class="avatar">
-                 <img :src='avatar'>
+                 <img :src='user.avatar'>
             </div>
 
-            <div class="username">凉瓜炒蛋</div>
+            <div class="username">{{user.username}}</div>
         </div>
         <div class="data-box">
             <span class="box">
@@ -39,6 +39,10 @@
     export default {
         data() {
             return {
+                user: {
+                    username: '',
+                    userAvatar: ''
+                },
                 title: '个人中心',
                 goBack: false,
                 avatar: "./static/temp_avatar.jpg",

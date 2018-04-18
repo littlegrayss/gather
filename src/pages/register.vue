@@ -1,202 +1,219 @@
 <template>
-    <div class="register">
-        <h4 class="subtitle">注册</h4>
-        <div class="panel">
-            <Input :input="inputLists[0]" v-model="email">
-                <span class="tips"><span class="to-login" @click="toLogin">登录</span></span>
-            </Input>
-            <Input :input="inputLists[1]" v-model="username" />
-            <Input :input="inputLists[2]" v-model="psd" />
-            <Input :input="inputLists[2]" v-model="repsd" />
-                         
-            <button class="btn" @click="submit">Register in</button>
-        </div>
-    </div>
+	<div class="register">
+		<h4 class="subtitle">注册</h4>
+		<div class="panel">
+			<Input :input="inputLists[0]" v-model="email">
+				<span class="tips"><span class="to-login" @click="toLogin">登录</span></span>
+			</Input>
+			<Input :input="inputLists[1]" v-model="username" />
+			<Input :input="inputLists[2]" v-model="psd" />
+			<Input :input="inputLists[2]" v-model="repsd" />
+						 
+			<button class="btn" @click="submit">Register in</button>
+		</div>
+	</div>
 </template>
 
 <script>
-    import Input from '../components/Input'
-    export default {
-        data() {
-            return {  
-                email: '',
-                username: '',
-                psd: '',
-                repsd: '',                
-                inputLists: [
-                {
-                    name: 'email',
-                    text: 'Email',
-                    type: 'text'
-                },
-                {
-                    name: 'username',
-                    text: 'username',
-                    type: 'text'
-                },
-                {
-                    name: 'password',
-                    text: 'Password',
-                    type: 'password'
-                },
-                {
-                    name: 'rePassword',
-                    text: 'Password-again',
-                    type: 'password'
-                }
-            ]}
-        },
-        methods: {
-            toLogin() {
-                this.$router.push('./login');
-            },
-            submit() {
-                console.log(this.email);
-                console.log(this.username);
-                console.log(this.psd);
-                console.log(this.repsd);                
-                
-                if (this.email == '') {
-                    this.$store.commit('on','请输入email');
-                    return false;
-                }
-                if (this.username == '') {
-                    this.$store.commit('on','请输入用户名');
-                    return false;
-                }
-                if (this.psd == '') {
-                    this.$store.commit('on','请输入密码');
-                    return false;
-                }
-                if (this.repsd == '') {
-                    this.$store.commit('on','请再次输入密码');                                        
-                    return false;
-                }
-                if (this.psd != this.repsd) {
-                    this.$store.commit('on','两次密码不相同');
-                    this.psd = '';
-                    this.repsd = '';
-                    return false;
-                }
+	import Input from '../components/Input'
+	export default {
+		data() {
+			return {  
+				email: '',
+				username: '',
+				psd: '',
+				repsd: '',                
+				inputLists: [
+				{
+					name: 'email',
+					text: 'Email',
+					type: 'text'
+				},
+				{
+					name: 'username',
+					text: 'username',
+					type: 'text'
+				},
+				{
+					name: 'password',
+					text: 'Password',
+					type: 'password'
+				},
+				{
+					name: 'rePassword',
+					text: 'Password-again',
+					type: 'password'
+				}
+			]}
+		},
+		methods: {
+			toLogin() {
+				this.$router.push('./login');
+			},
+			submit() {
+				console.log(this.email);
+				console.log(this.username);
+				console.log(this.psd);
+				console.log(this.repsd);                
+				
+				if (this.email == '') {
+					this.$store.commit('on','请输入email');
+					return false;
+				}                
+				if ( !/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(this.email)) {
+					this.$store.commit('on','邮箱不正确');
+					return false;
+				}
+				if (this.username == '') {
+					this.$store.commit('on','请输入用户名');
+					return false;
+				}
+				if (this.username.length<4) {
+					this.$store.commit('on','用户名不能少于4位');
+					return false;
+				}
+				if (!/^[a-zA-Z0-9_-]{4,16}$/.test(this.username)) {
+					this.$store.commit('on','用户名含有特殊字符');
+					return false;
+				}
+				if (this.psd == '') {
+					this.$store.commit('on','请输入密码');
+					return false;
+				}
+				if (this.psd.length<6) {
+					this.$store.commit('on','密码不能少于6位');
+					return false;
+				}
+				if (this.repsd == '') {
+					this.$store.commit('on','请再次输入密码');                                        
+					return false;
+				}
+				if (this.psd != this.repsd) {
+					this.$store.commit('on','两次密码不相同');
+					this.psd = '';
+					this.repsd = '';
+					return false;
+				}
 
-                
-                //http://www.littlegray.xin:8801
-                var _this = this;
-                this.$http.get('./api/register',{
-                            params: {
-                                email: this.email,
-                                psd: this.psd,
-                                username: this.username
-                            }
-                        })
-                        .then(function (res) {
+				
+				//http://www.littlegray.xin:8801
+				var _this = this;
+				this.$http.get('./api/register',{
+							params: {
+								email: this.email,
+								psd: this.psd,
+								username: this.username
+							}
+						})
+						.then(function (res) {
 
-                            console.log(res.data);
-                            // data = JSON.parse(res.data);
-                            if (res.data.code == '200') {
-                                console.log('注册成功！');
-                                _this.$store.commit('getUserId',res.data.userId);
-                                console.log(_this.$store.state.userId);
-                                _this.$store.commit('yes');
-                                setTimeout(function(){
-                                    _this.$store.commit('hide');
-                                    _this.$router.push('./home');
-                                },1500);                          
+							console.log(res.data);
+							// data = JSON.parse(res.data);
+							if (res.data.code == '200') {
+								console.log('注册成功！');
+								_this.$store.commit('getUserId',res.data.userId);
+								console.log(_this.$store.state.userId);
+								_this.$store.commit('yes');
+								setTimeout(function(){
+									_this.$store.commit('hide');
+									_this.$router.push('./home');
+								},1500);                          
 
-                            } else {
-                                console.log('注册失败！');
-                                _this.$store.commit('no');
-                                setTimeout(function(){
-                                    _this.$store.commit('hide');
-                                    _this.psd = '';
-                                    _this.repsd = '';
-                                },1500);
-                            }
-                            
-                                              
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        }); 
-            }
-        },
-        components: {
-            Input
-        }
-    }
+							} else {
+								console.log('注册失败！');
+								_this.$store.commit('no');
+								setTimeout(function(){
+									_this.$store.commit('hide');
+									_this.psd = '';
+									_this.repsd = '';
+								},1500);
+							}
+							
+											  
+						})
+						.catch(function (error) {
+							console.log(error);
+						}); 
+			}
+		},
+		
+		components: {
+			Input
+		}
+	}
 </script>
 
 <style scoped>
 .login {
-    overflow: hidden;
+	overflow: hidden;
 }
 .subtitle {
-    text-align: center;
-    margin-top: 10vh; 
-    font-size: 20px;
-    
-    color: rgb(76,98,252);
+	text-align: center;
+	margin-top: 10vh; 
+	font-size: 20px;
+	
+	color: rgb(76,98,252);
 }
 .panel {
-    margin-top: -5vh;
-    /* width: 100%; */
-    /* height: 55vh; */
-    padding: 20px;
+	margin-top: -5vh;
+	/* width: 100%; */
+	/* height: 55vh; */
+	padding: 20px;
 
 }
 .input-row {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    margin: 12px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	margin: 12px 0;
 
 }
 .input-row label {
-    font-size: 14px;
-    font-weight: bold;
-    color: rgb(76,98,252);
-    /* align-self: flex-start; */
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(76,98,252);
+	/* align-self: flex-start; */
 }
 .input-row input {
-    /* width: 80%; */
-    box-sizing: border-box;
-    padding: 8px 16px;
-    height: 48px;
-    line-height: 1;
-    font-size: 18px;
-    margin-top: 8px;
-    border-radius: 2px;
-    outline: none;
-    border: 2.5px solid rgb(76,98,252);
+	/* width: 80%; */
+	box-sizing: border-box;
+	padding: 8px 16px;
+	height: 48px;
+	line-height: 1;
+	font-size: 18px;
+	margin-top: 8px;
+	border-radius: 2px;
+	outline: none;
+	border: 2.5px solid rgb(76,98,252);
 } 
 .input-row input:focus {
-    border: 2.5px solid blue;
+	border: 2.5px solid blue;
 }
 .btn {
-    /* background-color:  */
-    box-sizing: border-box;
-    border: 1px solid rgb(76,98,252);
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 28px;
-    border-radius: 2px;
-    background-color: rgb(76,98,252);
-    color: #fff;
-    width: 100%;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px
+	/* background-color:  */
+	box-sizing: border-box;
+	border: 1px solid rgb(76,98,252);
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 28px;
+	border-radius: 2px;
+	background-color: rgb(76,98,252);
+	color: #fff;
+	width: 100%;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 16px
 }
 .tips {
-    font-size: 12px;
-    float: right;
-    margin-right: 12px;
-    color: rgba(43,140,255,.6);
+	font-size: 12px;
+	float: right;
+	margin-right: 12px;
+	color: rgba(43,140,255,.6);
 }
 .tips:hover {
-    color: darkorange;
+	color: darkorange;
 }
 </style>

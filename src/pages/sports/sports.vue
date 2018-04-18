@@ -4,7 +4,7 @@
             <h1 @click="chooseType">{{sportsType}} <span class="iconfont icon-bottom"></span></h1>
         </sports-top> 
         <transition name="slide-fade"  mode="out-in">
-            <router-view v-on:listenToChoose="show" class="panel" :lists="lists"></router-view>  
+            <router-view v-on:listenToChoose="show" class="panel" :lists="lists" :type="type"></router-view>  
         </transition>        
 
         <div class="modal" v-if="isChooseBox">
@@ -41,6 +41,7 @@
                 isSelect: false,
                 isChooseBox: false,
                 sportsType: '篮球',
+                type: 0,
                 lists:[],
                 sportsNum: []
             }
@@ -57,12 +58,13 @@
             check(typeText,type) {
                 this.sportsType = typeText;
                 this.isChooseBox = false;
-                
+                this.type = type
                 
             },
             closeChooseBox() {
                 this.isChooseBox = false;
-            }
+            },
+           
             
         },
         computed: {
@@ -71,32 +73,17 @@
             }, 
             btnText() {
                 return this.$route.path == '/sports' ? 'Join In' : 'Create';
-            } 
+            },
+            
             
         },
         components: {
             sportsTop,createSports,bottomBar,joinSports
         },
         mounted() {
-             var _this = this;
-
-            //http://www.littlegray.xin:8801
-            this.$http
-            .get("http://www.littlegray.xin:8801/api/waiting_list",{
-                params: {
-                    type: 'football'
-                }
-            })
-            .then(function(res) {
-                console.log(res.data);
-                // data = JSON.parse(res.data);
-                _this.lists = res.data;
-                
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-        }
+             
+        },
+       
     }
 </script>
 

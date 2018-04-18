@@ -13,10 +13,12 @@
 </template>
 
 <script>
+    import store from "../../store/index";
     import bottomBar from "../../components/bottomBar";
     import Input from '../../components/Input'
     
-    export default {        
+    export default {
+        props: ['type'],
         data() {
             return {
                 site: '',
@@ -41,6 +43,12 @@
         },
         methods: {
             submitCreateSports() {
+                var userId = this.$store.state.userId;
+                if (!userId) {
+                    this.$store.commit('on','请先登录');                     
+                    this.$router.push('/login');	
+                    return false;		
+                }
                  if (this.site == '') {
                     this.$store.commit('on','请输入地点');
                     return false;
@@ -58,13 +66,13 @@
 
                 //http://www.littlegray.xin:8801
                 this.$http
-                .get("http://www.littlegray.xin:8801/api/create_sports",{
+                .get("./api/create_sports",{
                     params: {
-                        type: 'football',
+                        type: _this.type,
                         time: _this.time,
                         site: _this.site,
                         totalPeople: _this.people,
-                        userId: _this.$store.state.userId
+                        userId: userId
                     }
                 })
                 .then(function(res) {
